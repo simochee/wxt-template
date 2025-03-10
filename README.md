@@ -36,6 +36,46 @@ Chrome Web Store と Add-ons for Firefox から取得できる拡張機能の ID
 - `FIREFOX_JWT_ISSUER`
 - `FIREFOX_JWT_SECRET`
 
+## Additional: React + Tailwind CSS
+
+はじめに、必要な依存関係を追加でインストールします。
+
+```sh
+pnpm add react{,-dom}
+pnpm add -D @tsconfig/vite-react @types/react{,-dom} tailwindcss @tailwindcss/vite
+```
+
+`tsconfig.json` を更新します。
+
+```bash
+echo "$(jq '.extends |= ["@tsconfig/vite-react"] + (. // [])' tsconfig.json)" > tsconfig.json
+```
+
+つぎに、Tailwind CSS の Vite Plugin を `wxt.config.ts` に設定します。
+
+```diff
++ import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
++  vite: () => ({
++    plugins: [tailwindcss()],
++  }),
+});
+```
+
+さいごに、 Tailwind CSS のエントリーポイントとなる CSS ファイルを作成します。
+
+```sh
+mkdir -p src/assets
+echo "@import \"tailwindcss\";" > src/assets/styles.css
+```
+
+CSS ファイルはエントリーポイントの HTML ファイルで参照することで利用可能になります。
+
+```diff
++  <link rel="stylesheet" href="~/assets/styles.css">
+```
+
 ## License
 
 MIT
