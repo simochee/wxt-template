@@ -66,8 +66,7 @@ export default defineConfig({
 さいごに、 Tailwind CSS のエントリーポイントとなる CSS ファイルを作成します。
 
 ```sh
-mkdir -p src/assets
-echo "@import \"tailwindcss\";" > src/assets/styles.css
+echo "@import \"tailwindcss\";" > assets/styles.css
 ```
 
 CSS ファイルはエントリーポイントの HTML ファイルで参照することで利用可能になります。
